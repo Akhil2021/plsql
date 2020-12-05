@@ -1,0 +1,11 @@
+declare
+n number := &n;
+i number := 1;
+j number;
+begin
+for j in 1..n loop
+	i := i*j;
+end loop;
+dbms_output.put_line(i);
+end;
+/

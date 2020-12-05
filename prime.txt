@@ -1,0 +1,21 @@
+declare 
+i number;
+j number;
+n number := &n;
+m number;
+flag boolean := true;
+begin
+m := sqrt(n);
+for i in 2..m loop
+	j := MOD(n,i);
+	if j=0 then
+		flag := false;
+	end if;
+end loop;
+if (flag=true and n>1) then 
+	dbms_output.put_line('prime');
+else
+	dbms_output.put_line('not prime');
+end if;
+end;
+/

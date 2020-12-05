@@ -1,0 +1,3 @@
+Create table picture(id int,img BLOB);
+Insert into picture values(1,utl_raw.cast_to_raw('C:\Users\Akhil\Desktop\front.png'));
+Select utl_raw.cast_to_varchar2(utl_encode.base64_encode(img)) from picture;

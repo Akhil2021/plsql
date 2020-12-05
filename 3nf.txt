@@ -1,0 +1,64 @@
+DECLARE
+	eid emp1.eid%type;
+	emp_name emp1.ename%type;
+	e_name2 emp1.ename%type;
+	d_id emp1.did%type;
+	d_name2 emp1.dname%type;
+	d_name emp1.dname%type;
+	pin emp1.zipcode%type;
+	pin1 emp1.zipcode%type;
+	state1 emp1.state%type;
+	state2 emp1.state%type;
+	city1 emp1.city%type;
+Cursor e is select e_id,e_name from emp_details;
+Cursor d is select zipcode, state, city from emp_details;
+Cursor f is select e_id,zipcode from emp_details;
+Begin
+	
+	open d;
+	LOOP
+	Fetch d into pin,state1,city1;
+	Begin 
+	Select state into state2 from area_details where pin=zipcode;
+	EXCEPTION
+		When no_data_found then
+			state2:=null;
+	end;
+	if(state2 is null) Then 
+		insert into area_details values(pin,state1,city1);
+	end if;
+	EXIT when d%notfound;
+	end loop;
+	close d;
+	open e;
+	LOOP
+	Fetch e into eid,emp_name;
+	Begin 
+		Select e_name into e_name2 from employee_details where e_id = eid;
+	EXCEPTION
+		when no_data_found then 
+			e_name2:=null;
+	end;
+	if(e_name2 is null) then
+		insert into employee_details values(eid,emp_name);
+	end if;
+	exit when e%notfound;
+	end loop;
+	close e;
+	open f;
+	LOOP
+	Fetch f into eid,pin;
+	Begin 
+		Select zipcode into pin1 from employee_details where e_id = eid;
+	EXCEPTION
+		when no_data_found then 
+			pin1:=null;
+	end;
+	if(pin1 is null) then
+		insert into employee_addr values(eid,pin);
+	end if;
+	exit when e%notfound;
+	end loop;
+	close e;
+end;
+/

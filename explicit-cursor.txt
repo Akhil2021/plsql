@@ -1,0 +1,15 @@
+DECLARE 
+   e_id employee_details.e_id%type; 
+   e_name employee_details.e_name%type; 
+   CURSOR emp is 
+      SELECT e_id, e_name FROM employee_details;
+BEGIN 
+   OPEN emp;
+   LOOP 
+   FETCH emp into e_id, e_name; 
+      EXIT WHEN emp%notfound; 
+      dbms_output.put_line(e_id || ' ' || e_name ); 
+   END LOOP; 
+   CLOSE emp;
+END; 
+/

@@ -1,0 +1,16 @@
+declare
+bal number := &bal;
+choice varchar(20) := '&choice';
+amt number := &amt;
+total number;
+begin
+if(choice='deposit') then
+	total := bal + amt;
+elsif(amt>bal) then
+	dbms_output.put_line('Insufficient balance');
+else
+	total := bal - amt;
+end if;
+dbms_output.put_line('current balance:'||total);
+end;
+/

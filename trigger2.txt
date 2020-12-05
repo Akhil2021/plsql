@@ -1,0 +1,9 @@
+create trigger stud_mark
+before INSERT 
+on 
+student 
+for each row
+begin
+update student set student.total = student.m1 + student.m2 where student.id = :NEW.id;
+end;
+/

@@ -1,0 +1,21 @@
+declare
+a number := 0;
+b number := 1;
+n number := &n;
+c number;
+i number;
+begin
+if(n=1) then
+	dbms_output.put_line('0');
+elsif(n=2) then
+	dbms_output.put_line('1');
+else
+for i in 3..n loop
+	c := a + b;
+	a:=b;
+	b:=c;
+end loop;
+dbms_output.put_line(c);
+end if;
+end;
+/
